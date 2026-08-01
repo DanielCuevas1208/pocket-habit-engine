@@ -1,0 +1,35 @@
+# Flutter and Dart
+.dart_tool/
+.packages
+.pub/
+/build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+
+# Generated platform files
+*.iml
+.idea/
+.vscode/
+
+# Native build output
+.gradle/
+android/.gradle/
+android/app/build/
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+macos/Pods/
+macos/Flutter/ephemeral/
+windows/flutter/ephemeral/
+linux/flutter/ephemeral/
+
+# Local tool state
+coverage/
+*.log
+.DS_Store
+Thumbs.db
+# Local platform configuration
+android/local.properties
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh

@@ -1,0 +1,5 @@
+# This file records the Flutter project metadata.
+version:
+  revision: "stable"
+  channel: "stable"
+project_type: app
