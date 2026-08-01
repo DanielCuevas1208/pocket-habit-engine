@@ -1,23 +1,22 @@
 # Pocket Habit Engine
 
-Pocket Habit Engine helps one person test a routine without pressure.
+Pocket Habit Engine is a mobile app for testing one routine at a time.
 
-Create an experiment. Record each day. Review the pattern.
+Create an experiment, record each day, and review the last seven days.
 
-The app stores every record on the device. It uses no account, notification, or remote analytics service.
+The app stores records on the device. It does not use an account, notifications,
+or a remote analytics service.
 
-## Value
+## Features
 
-The app turns a vague routine into a short, observable experiment.
+The app turns a routine into a short experiment that you can review.
 
-A calm interface keeps attention on noticing, not winning.
-
-A seven-day view makes small patterns easy to scan.
+The seven-day view shows completed and missed days in one place.
 
 ## First release
 
 - Create a habit experiment with a cue, action, and length.
-- Record a day with one accessible control.
+- Record a day with one clear control.
 - Add a short note for context.
 - Review completion across the latest seven days.
 - Start with useful local sample data.
@@ -113,4 +112,4 @@ Run the verification commands after installing Flutter.
 - SQLite support targets mobile Flutter builds.
 - The first run adds sample data when the database is empty.
 
-These limits keep the supporting project small and focused.
+These limits keep the project small and focused.
