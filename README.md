@@ -1,32 +1,81 @@
 # Pocket Habit Engine
 
-Pocket Habit Engine is a mobile app for testing one routine at a time.
+[![CI status](https://github.com/DanielCuevas1208/pocket-habit-engine/actions/workflows/flutter.yml/badge.svg)](https://github.com/DanielCuevas1208/pocket-habit-engine/actions)
 
-Create an experiment, record each day, and review the last seven days.
+Pocket Habit Engine is a calm, offline app for testing one routine at a time.
 
-The app stores records on the device. It does not use an account, notifications,
-or a remote analytics service.
+Build one small experiment. Record each day. Then review the latest seven days in one chart.
+
+Every record stays on the device. The app needs no account, no login, and no network access. It sends no notifications and reports no analytics.
+
+## Why an experiment
+
+Habits are easy to guess and hard to observe. A short experiment makes a routine visible.
+
+Define three things:
+
+1. A cue. This is the trigger that starts the routine.
+2. An action. This is the smallest useful step.
+3. A length. This is the number of days to observe.
+
+The app turns these into one clear statement:
+
+> After I finish my first coffee, I will step outside for five minutes.
+
+Each day, mark the routine complete or leave it empty. Add a note when you notice something. The app draws one chart from the records.
+
+## First look
+
+The app has two tabs.
+
+**Today** shows your experiments and the day's progress.
+
+```text
+Test one small change.
+Notice what helps. Keep what fits.
+
+     1                   1
+  Active               Today
+
+Your experiments
+
+Morning light
+After I finish my first coffee, I will step outside for five minutes.
+[###############......]
+7 of 14 days                71% observed
+```
+
+**Review** shows one chart per experiment.
+
+```text
+Look for a pattern.
+A record is useful even when the routine changes.
+
+Morning light                          71% this week
+5 completed days so far
+
+Day 1  Day 2  Day 3  Day 4  Day 5  Day 6  Day 7
+  #      #      .      #      .      #      #
+
+Overall observation: 71%
+```
+
+The figures above match the seeded sample data.
 
 ## Features
 
-The app turns a routine into a short experiment that you can review.
-
-The seven-day view shows completed and missed days in one place.
-
-## First release
-
-- Create a habit experiment with a cue, action, and length.
-- Record a day with one clear control.
-- Add a short note for context.
+- Create an experiment with a cue, action, and length.
+- Mark any of the latest seven days complete or missed.
+- Add a short note for context on any day.
 - Review completion across the latest seven days.
-- Start with useful local sample data.
+- Start with a useful local sample experiment.
 
 ## Architecture
 
 The project uses four small layers:
 
-- `ui/` contains the mobile screens and reusable interaction pieces.
-- `state/` coordinates loading, mutations, and screen updates.
+- `ui/` renders the screens and shared interaction pieces.
+- `state/` coordinates loading, changes, and screen updates.
 - `domain/` calculates dates, windows, and completion rates.
 - `data/` stores experiments and check-ins in SQLite.
 
@@ -34,7 +83,17 @@ SQLite enforces one check-in per experiment per day.
 
 `ChangeNotifier` keeps state management local and easy to inspect.
 
-The chart uses Flutter canvas primitives. It needs no chart service.
+The chart uses Flutter canvas primitives. It needs no chart library and no network.
+
+## Data model
+
+Two tables hold all records.
+
+`experiments` stores the title, cue, action, start date, and target days.
+
+`check_ins` stores one row per experiment per day, with a completed flag and an optional note.
+
+The unique constraint on `(experiment_id, day)` prevents duplicate rows.
 
 ## Setup
 
@@ -46,7 +105,7 @@ Run this once when the mobile folders are absent:
 flutter create --platforms=android,ios .
 ```
 
-Install project packages:
+Install the project packages:
 
 ```bash
 flutter pub get
@@ -60,9 +119,9 @@ flutter run
 
 The first run creates one local sample experiment.
 
-## Example fixture output
+## Sample output
 
-The sample fixture contains five completed days across seven recent days.
+The seeded fixture has five completed days in the latest seven.
 
 ```text
 Morning light
@@ -71,7 +130,7 @@ After I finish my first coffee, I will step outside for five minutes.
 71% this week
 ```
 
-This output demonstrates the seeded fixture. It does not report user results.
+This output shows the seeded fixture. It does not report user results.
 
 ## Verification
 
@@ -87,21 +146,23 @@ Analyze the project:
 flutter analyze
 ```
 
-Run deterministic tests:
+Run the deterministic tests:
 
 ```bash
 flutter test
 ```
 
-GitHub Actions runs these checks for pushes and pull requests.
+GitHub Actions runs these checks on pushes and pull requests.
 
 ## Test status
 
-Deterministic tests cover date windows, completion rates, and storage map round trips.
+Deterministic tests cover date tools, date windows, completion rates, and storage map round trips.
 
-The local environment used for this build did not include Flutter.
+See `test/` for the suite.
 
-Run the verification commands after installing Flutter.
+The build environment for this document did not include Flutter.
+
+Run the verification commands after you install Flutter.
 
 ## Limitations
 
@@ -113,3 +174,15 @@ Run the verification commands after installing Flutter.
 - The first run adds sample data when the database is empty.
 
 These limits keep the project small and focused.
+
+## Contributing
+
+See CONTRIBUTING.md for the development workflow.
+
+## Changelog
+
+See CHANGELOG.md for the version history.
+
+## License
+
+MIT. See LICENSE for details.
