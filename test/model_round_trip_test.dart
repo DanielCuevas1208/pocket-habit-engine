@@ -18,7 +18,8 @@ void main() {
 
     expect(restored.id, 8);
     expect(restored.title, source.title);
-    expect(restored.statement, 'After I close my laptop, I will write one line.');
+    expect(
+        restored.statement, 'After I close my laptop, I will write one line.');
     expect(restored.startDate, DateTime(2026, 2, 10));
     expect(restored.targetDays, 14);
   });

@@ -7,7 +7,8 @@ import '../models/habit_experiment.dart';
 import '../domain/experiment_insights.dart';
 
 class HabitStore extends ChangeNotifier {
-  HabitStore({HabitRepository? repository}) : _repository = repository ?? HabitRepository();
+  HabitStore({HabitRepository? repository})
+      : _repository = repository ?? HabitRepository();
 
   final HabitRepository _repository;
   final Map<int, List<CheckIn>> _checkIns = <int, List<CheckIn>>{};
@@ -45,7 +46,8 @@ class HabitStore extends ChangeNotifier {
       _checkIns.clear();
       for (final experiment in _experiments) {
         if (experiment.id != null) {
-          _checkIns[experiment.id!] = await _repository.getCheckIns(experiment.id!);
+          _checkIns[experiment.id!] =
+              await _repository.getCheckIns(experiment.id!);
         }
       }
     } catch (_) {
@@ -88,7 +90,8 @@ class HabitStore extends ChangeNotifier {
     );
     await _repository.saveCheckIn(checkIn);
     final entries = _checkIns[experiment.id] ?? <CheckIn>[];
-    entries.removeWhere((entry) => DateTools.key(entry.day) == DateTools.key(day));
+    entries
+        .removeWhere((entry) => DateTools.key(entry.day) == DateTools.key(day));
     entries.add(checkIn);
     entries.sort((a, b) => a.day.compareTo(b.day));
     _checkIns[experiment.id!] = entries;
@@ -108,7 +111,8 @@ class HabitStore extends ChangeNotifier {
     );
     await _repository.saveCheckIn(checkIn);
     final entries = _checkIns[experiment.id] ?? <CheckIn>[];
-    entries.removeWhere((entry) => DateTools.key(entry.day) == DateTools.key(day));
+    entries
+        .removeWhere((entry) => DateTools.key(entry.day) == DateTools.key(day));
     entries.add(checkIn);
     entries.sort((a, b) => a.day.compareTo(b.day));
     _checkIns[experiment.id!] = entries;
@@ -116,6 +120,7 @@ class HabitStore extends ChangeNotifier {
   }
 
   double rateFor(HabitExperiment experiment) {
-    return ExperimentInsights.completionRate(experiment, checkInsFor(experiment));
+    return ExperimentInsights.completionRate(
+        experiment, checkInsFor(experiment));
   }
 }

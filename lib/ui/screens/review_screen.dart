@@ -19,11 +19,15 @@ class ReviewScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
         children: <Widget>[
-          Text('Look for a pattern.', style: Theme.of(context).textTheme.headlineMedium),
+          Text('Look for a pattern.',
+              style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 8),
           Text(
             'A record is useful even when the routine changes.',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: const Color(0xFF577069)),
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge
+                ?.copyWith(color: const Color(0xFF577069)),
           ),
           const SizedBox(height: 24),
           if (experiments.isEmpty)
@@ -67,26 +71,36 @@ class _ReviewCard extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Expanded(child: Text(experiment.title, style: Theme.of(context).textTheme.titleMedium)),
-                Text('${(sevenDayRate * 100).round()}% this week', style: Theme.of(context).textTheme.labelLarge),
+                Expanded(
+                    child: Text(experiment.title,
+                        style: Theme.of(context).textTheme.titleMedium)),
+                Text('${(sevenDayRate * 100).round()}% this week',
+                    style: Theme.of(context).textTheme.labelLarge),
               ],
             ),
             const SizedBox(height: 4),
             Text(
               '$completed completed day${completed == 1 ? '' : 's'} so far',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF577069)),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: const Color(0xFF577069)),
             ),
             const SizedBox(height: 20),
             Semantics(
-              label: '${(sevenDayRate * 100).round()} percent completed across the last seven days',
+              label:
+                  '${(sevenDayRate * 100).round()} percent completed across the last seven days',
               child: _CompletionChart(checkIns: checkIns),
             ),
             const SizedBox(height: 16),
             Row(
               children: <Widget>[
-                Icon(Icons.flag_outlined, size: 18, color: Theme.of(context).colorScheme.primary),
+                Icon(Icons.flag_outlined,
+                    size: 18, color: Theme.of(context).colorScheme.primary),
                 const SizedBox(width: 8),
-                Expanded(child: Text('Overall observation: ${(overallRate * 100).round()}%')),
+                Expanded(
+                    child: Text(
+                        'Overall observation: ${(overallRate * 100).round()}%')),
               ],
             ),
           ],
@@ -109,7 +123,8 @@ class _CompletionChart extends StatelessWidget {
         SizedBox(
           height: 120,
           width: double.infinity,
-          child: CustomPaint(painter: _ChartPainter(days: days, checkIns: checkIns)),
+          child: CustomPaint(
+              painter: _ChartPainter(days: days, checkIns: checkIns)),
         ),
         Row(
           children: days
@@ -118,7 +133,10 @@ class _CompletionChart extends StatelessWidget {
                   child: Text(
                     DateTools.shortWeekday(day).substring(0, 1),
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(color: const Color(0xFF577069)),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelSmall
+                        ?.copyWith(color: const Color(0xFF577069)),
                   ),
                 ),
               )
@@ -154,8 +172,10 @@ class _ChartPainter extends CustomPainter {
     final barWidth = size.width / (days.length * 1.8);
     for (var index = 0; index < days.length; index++) {
       final dayKey = DateTools.key(days[index]);
-      final complete = checkIns.any((checkIn) => checkIn.completed && DateTools.key(checkIn.day) == dayKey);
-      final left = index * (size.width / days.length) + (size.width / days.length - barWidth) / 2;
+      final complete = checkIns.any((checkIn) =>
+          checkIn.completed && DateTools.key(checkIn.day) == dayKey);
+      final left = index * (size.width / days.length) +
+          (size.width / days.length - barWidth) / 2;
       final barHeight = complete ? chartHeight * 0.82 : chartHeight * 0.22;
       final rect = RRect.fromRectAndRadius(
         Rect.fromLTWH(left, chartHeight - barHeight, barWidth, barHeight),
@@ -181,9 +201,12 @@ class _ReviewNote extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Icon(Icons.lightbulb_outline, color: Theme.of(context).colorScheme.primary),
+            Icon(Icons.lightbulb_outline,
+                color: Theme.of(context).colorScheme.primary),
             const SizedBox(width: 12),
-            const Expanded(child: Text('Use the chart as a prompt. It does not judge the experiment.')),
+            const Expanded(
+                child: Text(
+                    'Use the chart as a prompt. It does not judge the experiment.')),
           ],
         ),
       ),

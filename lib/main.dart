@@ -75,7 +75,8 @@ class ErrorView extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Icon(Icons.cloud_off, size: 48, color: Theme.of(context).colorScheme.primary),
+              Icon(Icons.cloud_off,
+                  size: 48, color: Theme.of(context).colorScheme.primary),
               const SizedBox(height: 16),
               Text(
                 store.errorMessage!,
@@ -112,11 +113,12 @@ ThemeData buildAppTheme() {
       elevation: 0,
       centerTitle: false,
     ),
-    cardTheme: const CardTheme(
+    cardTheme: const CardThemeData(
       color: Colors.white,
       elevation: 0,
       margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(24))),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(24))),
     ),
     inputDecorationTheme: const InputDecorationTheme(
       filled: true,
