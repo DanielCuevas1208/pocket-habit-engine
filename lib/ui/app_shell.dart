@@ -39,7 +39,8 @@ class _HomeShellState extends State<HomeShell> {
   void _openExperiment(HabitExperiment experiment) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (context) => ExperimentScreen(store: widget.store, experiment: experiment),
+        builder: (context) =>
+            ExperimentScreen(store: widget.store, experiment: experiment),
       ),
     );
   }
@@ -50,7 +51,8 @@ class _HomeShellState extends State<HomeShell> {
       body: IndexedStack(
         index: _selectedIndex,
         children: <Widget>[
-          OverviewScreen(store: widget.store, onOpenExperiment: _openExperiment),
+          OverviewScreen(
+              store: widget.store, onOpenExperiment: _openExperiment),
           ReviewScreen(store: widget.store),
         ],
       ),
@@ -63,10 +65,17 @@ class _HomeShellState extends State<HomeShell> {
           : null,
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
-        onDestinationSelected: (index) => setState(() => _selectedIndex = index),
+        onDestinationSelected: (index) =>
+            setState(() => _selectedIndex = index),
         destinations: const <NavigationDestination>[
-          NavigationDestination(icon: Icon(Icons.today_outlined), selectedIcon: Icon(Icons.today), label: 'Today'),
-          NavigationDestination(icon: Icon(Icons.insights_outlined), selectedIcon: Icon(Icons.insights), label: 'Review'),
+          NavigationDestination(
+              icon: Icon(Icons.today_outlined),
+              selectedIcon: Icon(Icons.today),
+              label: 'Today'),
+          NavigationDestination(
+              icon: Icon(Icons.insights_outlined),
+              selectedIcon: Icon(Icons.insights),
+              label: 'Review'),
         ],
       ),
     );
@@ -132,13 +141,14 @@ class _CreateExperimentSheetState extends State<CreateExperimentSheet> {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: Color(0xFFB9C7BA),
+                      color: const Color(0xFFB9C7BA),
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
                 ),
                 const SizedBox(height: 20),
-                Text('Start a small experiment', style: Theme.of(context).textTheme.headlineSmall),
+                Text('Start a small experiment',
+                    style: Theme.of(context).textTheme.headlineSmall),
                 const SizedBox(height: 8),
                 Text(
                   'Name the routine, its cue, and the smallest useful action.',
@@ -148,31 +158,43 @@ class _CreateExperimentSheetState extends State<CreateExperimentSheet> {
                 TextFormField(
                   controller: _titleController,
                   textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(labelText: 'Experiment name', hintText: 'Evening reset'),
-                  validator: (value) => value == null || value.trim().isEmpty ? 'Add a name.' : null,
+                  decoration: const InputDecoration(
+                      labelText: 'Experiment name', hintText: 'Evening reset'),
+                  validator: (value) => value == null || value.trim().isEmpty
+                      ? 'Add a name.'
+                      : null,
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
                   controller: _cueController,
                   textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(labelText: 'When I...', hintText: 'finish dinner'),
-                  validator: (value) => value == null || value.trim().isEmpty ? 'Add a cue.' : null,
+                  decoration: const InputDecoration(
+                      labelText: 'When I...', hintText: 'finish dinner'),
+                  validator: (value) => value == null || value.trim().isEmpty
+                      ? 'Add a cue.'
+                      : null,
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
                   controller: _actionController,
                   textCapitalization: TextCapitalization.sentences,
-                  decoration: const InputDecoration(labelText: 'I will...', hintText: 'put my phone away'),
-                  validator: (value) => value == null || value.trim().isEmpty ? 'Add an action.' : null,
+                  decoration: const InputDecoration(
+                      labelText: 'I will...', hintText: 'put my phone away'),
+                  validator: (value) => value == null || value.trim().isEmpty
+                      ? 'Add an action.'
+                      : null,
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
                   controller: _daysController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(labelText: 'Experiment length', suffixText: 'days'),
+                  decoration: const InputDecoration(
+                      labelText: 'Experiment length', suffixText: 'days'),
                   validator: (value) {
                     final days = int.tryParse(value?.trim() ?? '');
-                    return days == null || days < 1 || days > 90 ? 'Use 1 to 90 days.' : null;
+                    return days == null || days < 1 || days > 90
+                        ? 'Use 1 to 90 days.'
+                        : null;
                   },
                 ),
                 const SizedBox(height: 20),

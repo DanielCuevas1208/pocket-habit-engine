@@ -18,8 +18,10 @@ class ExperimentInsights {
     DateTime? through,
   }) {
     final requestedEnd = through ?? DateTools.today();
-    final experimentEnd = DateTools.addDays(experiment.startDate, experiment.targetDays - 1);
-    final end = requestedEnd.isBefore(experimentEnd) ? requestedEnd : experimentEnd;
+    final experimentEnd =
+        DateTools.addDays(experiment.startDate, experiment.targetDays - 1);
+    final end =
+        requestedEnd.isBefore(experimentEnd) ? requestedEnd : experimentEnd;
     return checkIns
         .where((checkIn) =>
             checkIn.completed &&
@@ -52,7 +54,8 @@ class ExperimentInsights {
     final end = through ?? DateTools.today();
     final keys = daysForRange(end, 7).map(DateTools.key).toSet();
     final completed = checkIns
-        .where((checkIn) => checkIn.completed && keys.contains(DateTools.key(checkIn.day)))
+        .where((checkIn) =>
+            checkIn.completed && keys.contains(DateTools.key(checkIn.day)))
         .map((checkIn) => DateTools.key(checkIn.day))
         .toSet()
         .length;

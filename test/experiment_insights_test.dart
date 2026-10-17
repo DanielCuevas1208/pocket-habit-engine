@@ -26,15 +26,18 @@ void main() {
     ];
 
     expect(
-      ExperimentInsights.completedDays(experiment, checkIns, through: DateTime(2026, 1, 4)),
+      ExperimentInsights.completedDays(experiment, checkIns,
+          through: DateTime(2026, 1, 4)),
       3,
     );
     expect(
-      ExperimentInsights.completionRate(experiment, checkIns, through: DateTime(2026, 1, 4)),
+      ExperimentInsights.completionRate(experiment, checkIns,
+          through: DateTime(2026, 1, 4)),
       0.75,
     );
     expect(
-      ExperimentInsights.completedDays(experiment, checkIns, through: DateTime(2026, 1, 10)),
+      ExperimentInsights.completedDays(experiment, checkIns,
+          through: DateTime(2026, 1, 10)),
       3,
     );
   });

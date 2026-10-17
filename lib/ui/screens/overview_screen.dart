@@ -6,7 +6,8 @@ import '../../models/habit_experiment.dart';
 import '../../state/habit_store.dart';
 
 class OverviewScreen extends StatelessWidget {
-  const OverviewScreen({required this.store, required this.onOpenExperiment, super.key});
+  const OverviewScreen(
+      {required this.store, required this.onOpenExperiment, super.key});
 
   final HabitStore store;
   final ValueChanged<HabitExperiment> onOpenExperiment;
@@ -35,11 +36,15 @@ class OverviewScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 120),
           children: <Widget>[
-            Text('Test one small change.', style: Theme.of(context).textTheme.headlineMedium),
+            Text('Test one small change.',
+                style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: 8),
             Text(
               'Notice what helps. Keep what fits.',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: const Color(0xFF577069)),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: const Color(0xFF577069)),
             ),
             const SizedBox(height: 24),
             Row(
@@ -65,10 +70,14 @@ class OverviewScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Your experiments', style: Theme.of(context).textTheme.titleLarge),
+                Text('Your experiments',
+                    style: Theme.of(context).textTheme.titleLarge),
                 Text(
                   DateTools.monthAndDay(DateTools.today()),
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(color: const Color(0xFF577069)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(color: const Color(0xFF577069)),
                 ),
               ],
             ),
@@ -90,7 +99,8 @@ class OverviewScreen extends StatelessWidget {
 }
 
 class _StatCard extends StatelessWidget {
-  const _StatCard({required this.label, required this.value, required this.icon});
+  const _StatCard(
+      {required this.label, required this.value, required this.icon});
 
   final String label;
   final String value;
@@ -117,7 +127,8 @@ class _StatCard extends StatelessWidget {
 }
 
 class _ExperimentCard extends StatelessWidget {
-  const _ExperimentCard({required this.experiment, required this.store, required this.onTap});
+  const _ExperimentCard(
+      {required this.experiment, required this.store, required this.onTap});
 
   final HabitExperiment experiment;
   final HabitStore store;
@@ -127,7 +138,8 @@ class _ExperimentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final rate = store.rateFor(experiment);
     final elapsed = ExperimentInsights.elapsedDays(experiment);
-    final todayIsComplete = store.checkInFor(experiment, DateTools.today())?.completed ?? false;
+    final todayIsComplete =
+        store.checkInFor(experiment, DateTools.today())?.completed ?? false;
     return Semantics(
       button: true,
       label: 'Open ${experiment.title} experiment',
@@ -147,21 +159,29 @@ class _ExperimentCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(experiment.title, style: Theme.of(context).textTheme.titleMedium),
+                          Text(experiment.title,
+                              style: Theme.of(context).textTheme.titleMedium),
                           const SizedBox(height: 6),
                           Text(
                             experiment.statement,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF577069)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: const Color(0xFF577069)),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(width: 12),
                     Icon(
-                      todayIsComplete ? Icons.check_circle : Icons.chevron_right,
-                      color: todayIsComplete ? Theme.of(context).colorScheme.primary : const Color(0xFF8A9A91),
+                      todayIsComplete
+                          ? Icons.check_circle
+                          : Icons.chevron_right,
+                      color: todayIsComplete
+                          ? Theme.of(context).colorScheme.primary
+                          : const Color(0xFF8A9A91),
                     ),
                   ],
                 ),
@@ -178,8 +198,10 @@ class _ExperimentCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text('$elapsed of ${experiment.targetDays} days', style: Theme.of(context).textTheme.labelLarge),
-                    Text('${(rate * 100).round()}% observed', style: Theme.of(context).textTheme.labelLarge),
+                    Text('$elapsed of ${experiment.targetDays} days',
+                        style: Theme.of(context).textTheme.labelLarge),
+                    Text('${(rate * 100).round()}% observed',
+                        style: Theme.of(context).textTheme.labelLarge),
                   ],
                 ),
               ],
@@ -201,11 +223,14 @@ class _EmptyExperimentState extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: <Widget>[
-            Icon(Icons.spa_outlined, size: 42, color: Theme.of(context).colorScheme.primary),
+            Icon(Icons.spa_outlined,
+                size: 42, color: Theme.of(context).colorScheme.primary),
             const SizedBox(height: 12),
-            Text('Make room for one experiment.', style: Theme.of(context).textTheme.titleMedium),
+            Text('Make room for one experiment.',
+                style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 6),
-            const Text('Use the button below to define a routine worth noticing.'),
+            const Text(
+                'Use the button below to define a routine worth noticing.'),
           ],
         ),
       ),

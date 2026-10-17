@@ -6,7 +6,8 @@ import '../models/habit_experiment.dart';
 import 'app_database.dart';
 
 class HabitRepository {
-  HabitRepository({AppDatabase? database}) : _database = database ?? AppDatabase.instance;
+  HabitRepository({AppDatabase? database})
+      : _database = database ?? AppDatabase.instance;
 
   final AppDatabase _database;
 

@@ -6,7 +6,8 @@ import '../../models/habit_experiment.dart';
 import '../../state/habit_store.dart';
 
 class ExperimentScreen extends StatefulWidget {
-  const ExperimentScreen({required this.store, required this.experiment, super.key});
+  const ExperimentScreen(
+      {required this.store, required this.experiment, super.key});
 
   final HabitStore store;
   final HabitExperiment experiment;
@@ -43,7 +44,8 @@ class _ExperimentScreenState extends State<ExperimentScreen> {
     return AnimatedBuilder(
       animation: widget.store,
       builder: (context, _) {
-        final todayCheckIn = widget.store.checkInFor(widget.experiment, DateTools.today());
+        final todayCheckIn =
+            widget.store.checkInFor(widget.experiment, DateTools.today());
         final isComplete = todayCheckIn?.completed ?? false;
         final rate = widget.store.rateFor(widget.experiment);
         final elapsed = ExperimentInsights.elapsedDays(widget.experiment);
@@ -68,13 +70,17 @@ class _ExperimentScreenState extends State<ExperimentScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('The experiment', style: Theme.of(context).textTheme.labelLarge),
+                      Text('The experiment',
+                          style: Theme.of(context).textTheme.labelLarge),
                       const SizedBox(height: 12),
-                      Text(widget.experiment.statement, style: Theme.of(context).textTheme.headlineSmall),
+                      Text(widget.experiment.statement,
+                          style: Theme.of(context).textTheme.headlineSmall),
                       const SizedBox(height: 18),
                       Row(
                         children: <Widget>[
-                          Expanded(child: Text('$elapsed of ${widget.experiment.targetDays} days')),
+                          Expanded(
+                              child: Text(
+                                  '$elapsed of ${widget.experiment.targetDays} days')),
                           Text('${(rate * 100).round()}% observed'),
                         ],
                       ),
@@ -96,15 +102,19 @@ class _ExperimentScreenState extends State<ExperimentScreen> {
               const SizedBox(height: 10),
               FilledButton.icon(
                 onPressed: () => widget.store.toggleToday(widget.experiment),
-                icon: Icon(isComplete ? Icons.check_circle : Icons.radio_button_unchecked),
-                label: Text(isComplete ? 'Completed today' : 'Mark today complete'),
+                icon: Icon(isComplete
+                    ? Icons.check_circle
+                    : Icons.radio_button_unchecked),
+                label: Text(
+                    isComplete ? 'Completed today' : 'Mark today complete'),
                 style: FilledButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: isComplete ? const Color(0xFF2F6658) : null,
                 ),
               ),
               const SizedBox(height: 24),
-              Text('Recent days', style: Theme.of(context).textTheme.titleLarge),
+              Text('Recent days',
+                  style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 10),
               Row(
                 children: ExperimentInsights.daysForRange(DateTools.today(), 7)
@@ -114,9 +124,15 @@ class _ExperimentScreenState extends State<ExperimentScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 3),
                           child: _DayButton(
                             day: day,
-                            complete: widget.store.checkInFor(widget.experiment, day)?.completed ?? false,
-                            enabled: !day.isBefore(widget.experiment.startDate) && !day.isAfter(DateTools.today()),
-                            onTap: () => widget.store.toggleDay(widget.experiment, day),
+                            complete: widget.store
+                                    .checkInFor(widget.experiment, day)
+                                    ?.completed ??
+                                false,
+                            enabled:
+                                !day.isBefore(widget.experiment.startDate) &&
+                                    !day.isAfter(DateTools.today()),
+                            onTap: () =>
+                                widget.store.toggleDay(widget.experiment, day),
                           ),
                         ),
                       ),
@@ -124,7 +140,8 @@ class _ExperimentScreenState extends State<ExperimentScreen> {
                     .toList(),
               ),
               const SizedBox(height: 24),
-              Text('A note for later', style: Theme.of(context).textTheme.titleLarge),
+              Text('A note for later',
+                  style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 10),
               TextField(
                 controller: _noteController,
@@ -141,7 +158,10 @@ class _ExperimentScreenState extends State<ExperimentScreen> {
                 child: OutlinedButton.icon(
                   onPressed: _isSavingNote ? null : _saveNote,
                   icon: _isSavingNote
-                      ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
+                      ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2))
                       : const Icon(Icons.save_outlined),
                   label: const Text('Save note'),
                 ),
@@ -163,9 +183,11 @@ class _ExperimentScreenState extends State<ExperimentScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Experiment details', style: Theme.of(context).textTheme.titleLarge),
+              Text('Experiment details',
+                  style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 16),
-              Text('Started ${DateTools.monthAndDay(widget.experiment.startDate)}'),
+              Text(
+                  'Started ${DateTools.monthAndDay(widget.experiment.startDate)}'),
               const SizedBox(height: 8),
               Text('Planned length: ${widget.experiment.targetDays} days'),
               const SizedBox(height: 8),
@@ -195,7 +217,8 @@ class _DayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final isToday = DateTools.key(day) == DateTools.key(DateTools.today());
     final scheme = Theme.of(context).colorScheme;
-    final label = '${DateTools.shortWeekday(day)} ${day.day}, ${complete ? 'complete' : 'not complete'}';
+    final label =
+        '${DateTools.shortWeekday(day)} ${day.day}, ${complete ? 'complete' : 'not complete'}';
     return Semantics(
       button: enabled,
       label: label,
@@ -219,7 +242,8 @@ class _DayButton extends StatelessWidget {
                 Text(
                   DateTools.shortWeekday(day).substring(0, 1),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: complete ? Colors.white : const Color(0xFF577069),
+                        color:
+                            complete ? Colors.white : const Color(0xFF577069),
                         fontWeight: FontWeight.w700,
                       ),
                 ),
@@ -227,7 +251,8 @@ class _DayButton extends StatelessWidget {
                 Text(
                   '${day.day}',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: complete ? Colors.white : const Color(0xFF173A35),
+                        color:
+                            complete ? Colors.white : const Color(0xFF173A35),
                       ),
                 ),
                 const SizedBox(height: 4),
